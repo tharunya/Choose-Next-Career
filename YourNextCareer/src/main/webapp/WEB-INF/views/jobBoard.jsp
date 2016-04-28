@@ -62,7 +62,7 @@
 </fieldset>
 
 <div class = "form-group">
-	<h4>You have 1243 jobs from (302) employers</h4>
+	<h4>You have (1240) jobs from (302) employers</h4>
 </div>
 </form>
 </div>

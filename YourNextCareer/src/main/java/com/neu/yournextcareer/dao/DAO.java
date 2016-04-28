@@ -47,7 +47,7 @@ public class DAO {
 			getSession().close();
 		} catch (HibernateException e) {
 			log.log(Level.WARNING, "Cannot close", e);
-		}    
+		}
 		DAO.sessionThread.set(null);
 	}
 

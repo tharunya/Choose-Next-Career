@@ -19,7 +19,7 @@ public class JobSeekerValidator implements Validator {
 	@Override
 	public void validate(Object obj, Errors errors) {
 
-		JobSeeker seeker = (JobSeeker) obj;
+JobSeeker seeker = (JobSeeker) obj;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "error.firstname.required", "First Name Required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "error.lastName.required", "Last Name Required");
@@ -34,7 +34,6 @@ public class JobSeekerValidator implements Validator {
 		if(!seeker.getEmailID().equals(seeker.getConfirmEmailID())){
             errors.rejectValue("error.emailid.nomatch", "Enter the same email id in both fields");
         } 
-		
 	}
 
 }

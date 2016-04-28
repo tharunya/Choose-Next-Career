@@ -18,6 +18,7 @@
 		<mapping class="com.neu.yournextcareer.pojo.Job" />
 		<mapping class="com.neu.yournextcareer.pojo.Applications" />
 		<mapping class="com.neu.yournextcareer.pojo.Resume" />
-	
+
+
 	</session-factory>
 </hibernate-configuration>

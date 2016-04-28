@@ -23,19 +23,19 @@ public class EmployerValidator implements Validator{
 
 		Employer employer = (Employer) obj;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "error.firstname.required", "First Name Required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "error.firstname.required", "First Name ");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "error.lastName.required", "Last Name Required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "error.password.required", "Password Required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailID", "error.emailID.required", "Email ID is Required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "error.confirmPassword.required", "Confirming password is Required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmEmailID", "error.confirmEmailID.required", "Confirming email ID is Required");
 		
-		if(!employer.getPassword().equals(employer.getConfirmPassword())){
+	/**	if(!employer.getPassword().equals(employer.getConfirmPassword())){
             errors.rejectValue("error.password.nomatch", "Passwords must match");
         }
 		if(!employer.getEmailID().equals(employer.getConfirmEmailID())){
             errors.rejectValue("error.emailid.nomatch", "Enter the same email id in both fields");
-        } 
+        }**/ 
 		
 	}	
 }

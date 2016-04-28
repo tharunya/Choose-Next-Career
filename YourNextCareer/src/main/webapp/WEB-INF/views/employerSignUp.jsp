@@ -19,28 +19,26 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form:form action="employerSignUp.htm" commandName="employer" method="post">
+			<form:form action="employerSignUp.htm" commandName="employer"
+				method="post">
 				<div class="col-lg-6">
-					<div class="well well-sm">
-					</div>
+					<div class="well well-sm"></div>
 					<div class="form-group">
 						<label for="InputName">Enter First Name</label>
 						<div class="input-group">
-							<form:input type="text" action="/employerSignUp.htm" class="form-control" path="firstName"
+							<form:input type="text" class="form-control" path="firstName"
 								name="firstName" id="firstName" placeholder="Enter first name" />
-							<form:errors path="firstName" />
-							<span class="input-group-addon">
-							</span>
-
+							<span class="input-group-addon"> <font color="red"><form:errors
+										path="firstName" /></font></span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="LastName">Enter Last Name</label>
+						<label for="lastName">Enter Last Name</label>
 						<div class="input-group">
 							<form:input type="text" path="lastName" class="form-control"
-								name="LastName" id="LastName" placeholder="Enter last name" />
-							<font color="red"><form:errors path="lastName" /></font> <span
-								class="input-group-addon"></span>
+								name="lastName" id="lastName" placeholder="Enter last name" />
+							<span class="input-group-addon"> <font color="red"><form:errors
+										path="lastName" /></font></span>
 						</div>
 					</div>
 
@@ -49,10 +47,10 @@
 					<div class="form-group">
 						<label for="passwordinput">Password Input</label>
 						<div class="input-group">
-							<form:password placeholder="Enter Password" path="password"
+							<form:input type="password" placeholder="Enter Password" path="password"
 								class="form-control input-md" />
-							<font color="red"><form:errors path="password" /></font> <span
-								class="input-group-addon"></span></span>
+							<span class="input-group-addon"> <font color="red"><form:errors
+										path="password" /></font></span>
 						</div>
 					</div>
 
@@ -62,8 +60,8 @@
 						<div class="input-group">
 							<form:password placeholder="Retype password"
 								path="confirmPassword" class="form-control input-md" />
-							<span class="input-group-addon"> <form:errors
-									path="confirmPassword" /></span>
+							<span class="input-group-addon"> <font color="red"><form:errors
+										path="confirmPassword" /></font></span>
 						</div>
 					</div>
 
@@ -74,8 +72,8 @@
 						<div class="input-group">
 							<form:input type="email" path="emailID" class="form-control"
 								id="emailID" name="emailID" placeholder="Enter Email ID" />
-							<font color="red"><form:errors path="emailID" /></font> <span
-								class="input-group-addon"></span>
+							<span class="input-group-addon"> <font color="red"><form:errors
+										path="emailID" /></font></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -84,9 +82,8 @@
 							<form:input type="email" class="form-control" id="confirmEmailID"
 								name="confirmEmailID" path="confirmEmailID"
 								placeholder="Confirm Email" />
-							<font color="red"><form:errors path="confirmEmailID" /></font> <span
-								class="input-group-addon">
-							</span>
+							<span class="input-group-addon"> <font color="red"><form:errors
+										path="confirmEmailID" /></font></span>
 						</div>
 					</div>
 					<input type="submit" class="btn btn-info" name="submit" id="submit"

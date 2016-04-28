@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Success</title>
+<title>Job Posted</title>
 <body>
-<h3>Successful</h3>
+<h3>Successfully posted job.  <a href="${pageContext.request.contextPath}/employerJobPost.htm">Go back here!</a></h3>
 </body>
 </html>

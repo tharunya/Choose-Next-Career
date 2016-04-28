@@ -6,10 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import com.neu.yournextcareer.exception.JobException;
-import com.neu.yournextcareer.pojo.Employer;
 
-public class EmployerDAO extends DAO {
-
+public class EmployerDAO extends DAO{
     public List list() throws JobException {
         try {
             begin();
@@ -35,5 +33,5 @@ public class EmployerDAO extends DAO {
               throw new JobException("Could not list the employers", e);
           }
     }**/
-	
+
 }

@@ -33,9 +33,11 @@ public class Resume {
 	@Column(name="resumeFileName")
 	private String resumeFileName;
 
-	@Column(name="resumeTitle")
-	private String resumeTitle;
+/**	@Column(name="resumeTitle")
+	private String resumeTitle;**/
 	
+	@Column(name="skills")
+	private String skills;
 	/** CommonsMultipartFile getResume() {
 		return resume;
 	}
@@ -68,12 +70,20 @@ public class Resume {
 		this.resumeFileName = resumeFileName;
 	}
 
-	public String getResumeTitle() {
+	/**public String getResumeTitle() {
 		return resumeTitle;
 	}
 
 	public void setResumeTitle(String resumeTitle) {
 		this.resumeTitle = resumeTitle;
+	}**/
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
 	}
 
 }

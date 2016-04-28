@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/studentJobBoard.htm")
-
 public class StudentJobBoardController {
 	
 	@RequestMapping(method = RequestMethod.GET)

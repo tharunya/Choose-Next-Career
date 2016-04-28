@@ -1,5 +1,7 @@
 package com.neu.yournextcareer.dao;
 
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
@@ -40,13 +42,13 @@ public class PersonDAO extends DAO {
 			commit();
 			System.out.println("dao"+person.getEmailID());
 			return person;
-			
+
 		} catch (HibernateException e) {
 			rollback();
 			throw new HibernateException("Could not get user from the  " + e);
 		}
 	}
-	
+
 	public Person lookUpPersonByEmail(String eid) {
 		try {
 			begin();
@@ -55,18 +57,18 @@ public class PersonDAO extends DAO {
 			Person person = (Person) q.uniqueResult();
 			commit();
 			return person;
-			
+
 		} catch (HibernateException e) {
 			rollback();
 			throw new HibernateException("Could not get employer from the session. Message :  " + e);
 		}
 	}
-	
+
 	public boolean create(String role, String password, String emailId, String firstName, String lastName, String confirmPassword, String confirmEmailID)
 			throws EmailException {
 		try {
 			begin();
-	//		System.out.println("inside Person DAO");
+			//		System.out.println("inside Person DAO");
 
 			if (role == "Job Seeker") {
 				JobSeeker seeker = new JobSeeker();
@@ -77,8 +79,8 @@ public class PersonDAO extends DAO {
 				seeker.setPassword(password);
 				seeker.setConfirmPassword(confirmPassword);
 				seeker.setRole("Job Seeker");
-		//		seeker.setCompanyName(companyName);
-		
+				//		seeker.setCompanyName(companyName);
+
 				getSession().save(seeker);
 
 				commit();
@@ -92,7 +94,7 @@ public class PersonDAO extends DAO {
 				emp.setPassword(password);
 				emp.setConfirmPassword(confirmPassword);
 				emp.setRole("Employer");
-			//	emp.setCompanyName(companyName);
+				//	emp.setCompanyName(companyName);
 
 				getSession().save(emp);
 
@@ -121,4 +123,35 @@ public class PersonDAO extends DAO {
 			throw new Exception("Could not delete person " + person.getFirstName(), e);
 		}
 	}
+
+	public void updateemp(Employer employer,HttpSession ses) {
+		// TODO Auto-generated method stub
+		begin();
+		Employer e = new Employer();
+		Person p = (Person)ses.getAttribute("personSession");
+		System.out.print(p.getPersonID());
+		System.out.print(employer.getFirstName());
+		e.setPersonID(p.getPersonID());
+		e.setFirstName(employer.getFirstName());
+		e.setLastName(employer.getLastName());
+		e.setPassword(employer.getPassword());
+		e.setEmailID(employer.getEmailID());
+		e.setConfirmEmailID(employer.getConfirmEmailID());
+		e.setConfirmPassword(employer.getConfirmPassword());
+		e.setRole(p.getRole());
+		p.setPersonID(p.getPersonID());
+		p.setFirstName(employer.getFirstName());
+		p.setLastName(employer.getLastName());
+		p.setPassword(employer.getPassword());
+		p.setEmailID(employer.getEmailID());
+		p.setConfirmEmailID(employer.getConfirmEmailID());
+		p.setConfirmPassword(employer.getConfirmPassword());
+		ses.setAttribute("personSession", p);
+		getSession().update(e);
+		commit();
+		
+		
+		
+	}
+
 }

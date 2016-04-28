@@ -1,6 +1,5 @@
 package com.neu.yournextcareer.pojo;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="applicationTable")
-@PrimaryKeyJoinColumn(name="aid")
-public class Applications{	
-	
+public class Applications {
 	@Id
 	@GeneratedValue
 	@Column(name="appId", unique=true, nullable=false)
@@ -64,6 +61,4 @@ public class Applications{
 	public void setJob(Job job) {
 		this.job = job;
 	}
-
-	
 }

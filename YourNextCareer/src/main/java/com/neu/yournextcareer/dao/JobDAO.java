@@ -1,6 +1,7 @@
 package com.neu.yournextcareer.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -8,14 +9,11 @@ import org.hibernate.Query;
 
 import com.neu.yournextcareer.exception.JobException;
 import com.neu.yournextcareer.pojo.Applications;
-import com.neu.yournextcareer.pojo.Employer;
 import com.neu.yournextcareer.pojo.Job;
-import com.neu.yournextcareer.pojo.JobSeeker;
-import com.neu.yournextcareer.pojo.Person;
 
 public class JobDAO extends DAO {
 
-	public Job get(String jid) throws Exception {
+	public Job get(long jobId) throws Exception {
 		try {
 			System.out.println("In Job DAO");
 			begin();
@@ -24,7 +22,7 @@ public class JobDAO extends DAO {
 			Query q = getSession().createQuery("from Job where jobID = :jid");
 
 			System.out.println("Create");
-			q.setString("jid", jid);
+			q.setLong("jid", jobId);
 			Job job = (Job) q.uniqueResult();
 			System.out.println("Job uniqueResult"+job);
 			commit();
@@ -34,12 +32,13 @@ public class JobDAO extends DAO {
 
 		} catch (HibernateException e) {
 			rollback();
-			throw new Exception("Could not get the job assigned for the  " + jid, e);
+			throw new Exception("Could not get the job assigned for the  " + jobId, e);
 		}
 	}
 
 	public Job create(String jobTitle, String jobType, String jobCategory, String jobDescription,
-			String jobRequirement, String jobResponsibility, String jobLocation, String jobCompany)
+			String jobRequirement, String jobResponsibility, String jobLocation, String jobCompany, Date jobPostedDate)
+	// String jobStatus, Date jobPostedDate, Date jobAppliedDate, Date jobStatusChangedDate
 					throws JobException {
 		try {
 			begin();
@@ -56,6 +55,8 @@ public class JobDAO extends DAO {
 			job.setJobResponsibilities(jobResponsibility);
 			job.setJobLocation(jobLocation);
 			job.setJobCompany(jobCompany);
+			job.setJobPostedDate(new Date());
+			job.setJobStatus("Available");
 			System.out.println("job set");
 
 			//	getSession().save(job);
@@ -116,23 +117,16 @@ public class JobDAO extends DAO {
 		try{
 			begin();
 			applicationList=new ArrayList<Applications>();
-			Query jobRetrieval =getSession().createQuery("from Job where jobID=:jobID");
-			jobRetrieval.setLong("jobID",jobId);
+			Query applicationRetrieval =getSession().createQuery("from Applications where job.jobID=:jobId");
+			applicationRetrieval.setLong("jobId",jobId);
 			System.out.println("job Id from method"+jobId);
-			Job job=(Job) jobRetrieval.uniqueResult();
-
-			System.out.println("Job retrieval"+job);
-
-			Query applicationRetrieval=getSession().createQuery("from Applications where job=:job");
-			applicationRetrieval.setLong("job", jobId);
-			System.out.println("Job aplication"+applicationRetrieval+"job set"+jobId);
 			applicationList=applicationRetrieval.list();
-			System.out.println("Application list"+applicationList);
-
 			commit();
 		}
 		catch(Exception e){
 			rollback();
+			System.out.println(applicationList.size());
+
 		}
 		System.out.println(applicationList.size());
 		return applicationList;
@@ -161,22 +155,26 @@ public class JobDAO extends DAO {
 			rollback();
 		}
 
+
 	}
 
-	public Long jobSize(){
-		Job job = new Job();
-		Long jobSize = null;
+	public List<Job> jobsAvailableForSpecificSeeker(Long jobSeekerId) throws Exception{
+		List<Job> unappliedJobs = null;
+
 		try{
+			System.out.println("JobSeeker id in jobs available method"+jobSeekerId);
+
 			begin();
-			Query q=getSession().createQuery("From Job where jobID=:jid");
-			List list = q.list();
-			jobSize = (long) list.size();
+			Query q = getSession().createQuery("from Job j where j.jobID NOT IN"+ "(select a.job from Applications a"
+					+ " where a.person.personID=:pid)");
+			q.setLong("pid", jobSeekerId);
+			unappliedJobs = q.list();
+			commit();
+			System.out.println("Unapplied jobs"+unappliedJobs);
+			return unappliedJobs;
 		}catch(Exception e){
-			e.printStackTrace();
 			rollback();
+			throw new Exception("Could not get jobs", e);
 		}
-
-		return jobSize;
 	}
-
 }

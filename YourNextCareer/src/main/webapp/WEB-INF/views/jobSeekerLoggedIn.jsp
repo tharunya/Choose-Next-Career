@@ -57,31 +57,20 @@
 						<!-- /.dropdown -->
 					
 		 <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-    <i class="fa fa-user fa-fw"></i>
-    <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="${pageContext.request.contextPath}/jobSeekerUpdateProfile.htm">User Profile</a></li>
-     <li class="divider"></li>
-	 <li><a href="<c:url value="/logout.htm"/></c>">Logout
-	 </a></li>
-    </ul>
-  </div>
-		
+   	
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#" aria-expanded="true"> <i
 					class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-user">
-					<li><a href="/jobSeekerUpdateProfile.htm"><i
+					<li><a href="${pageContext.request.contextPath}/jobSeekerUpdateProfile.htm"><i
 							class="fa fa-user fa-fw"></i> User Profile</a></li>
 					<li class="divider"></li>
-					<li><a href="${pageContext.request.contextPath}/logout.htm"><i class="fa fa-sign-out fa-fw"></i>
+					<li><a href="${pageContext.request.contextPath}/home.htm"><i class="fa fa-sign-out fa-fw"></i>
 							Logout</a></li>
 
 				</ul> <!-- /.dropdown-user --></li>
-
+</div>
 			<!-- /.dropdown -->
 		</ul>
 		<!-- /.navbar-top-links -->
@@ -89,24 +78,16 @@
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
-					<li class="sidebar-search">
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</div> <!-- /input-group -->
-					</li>
-					<li><a href="jobSeekerDashboard.htm"><i
+					<li><a href="${pageContext.request.contextPath}/jobSeekerDashboard.htm"><i
 							class="fa fa-dashboard fa-fw"></i> Look out for jobs</a></li>
-					<li><a href="jobSeekerUpdateProfile.htm"><i
+					<li><a href="${pageContext.request.contextPath}/jobSeekerUpdateProfile.htm"><i
 							class="fa fa-edit fa-fw"></i> Update Profile</a></li>
-					<li><a href="updateBasicProfile.htm">Modify Basic Details</a></li>
-					<li><a href="jobSeekerApplicationStatus.htm"><i
-							class="fa fa-wrench fa-fw"></i> Check Status/ Withdraw
-							Application</a></li>
+		<!-- 			<li><a href="${pageContext.request.contextPath}/jobSeekerUpdateBasicProfile.htm">Modify Basic Details</a></li> -->
+					<li><a href="${pageContext.request.contextPath}/jobSeekerApplicationStatus.htm"><i
+							class="fa fa-wrench fa-fw"></i> Check
+							Applications</a></li>
+		<!-- 					<li><a href="${pageContext.request.contextPath}/buildprofile.htm"><i
+							class="fa fa-wrench fa-fw"></i> Build Profile</a></li> -->
 				</ul>
 			</div>
 			<!-- /.sidebar-collapse -->

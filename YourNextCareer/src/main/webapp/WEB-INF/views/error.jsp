@@ -6,6 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Job Posted</title>
 <body>
-<h3>Error</h3>
+<h3><a href="home.htm">Wrong credentials, Please go to home page!</a></h3>
 </body>
 </html>

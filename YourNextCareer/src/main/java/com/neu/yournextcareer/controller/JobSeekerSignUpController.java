@@ -13,7 +13,6 @@ import com.neu.yournextcareer.dao.PersonDAO;
 import com.neu.yournextcareer.pojo.JobSeeker;
 
 @Controller
-@RequestMapping("/jobSeekerSignUp.htm")
 public class JobSeekerSignUpController {
 	
 	@Autowired		
@@ -27,25 +26,29 @@ public class JobSeekerSignUpController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value="/jobSeekerSignUp.htm")
-	protected String doSubmitAction(@ModelAttribute("seeker") JobSeeker seeker, BindingResult result) throws Exception {
+	public String doSubmitAction(@ModelAttribute("seeker") JobSeeker seeker, BindingResult result) throws Exception {
 		jobseekerValidator.validate(seeker, result);
 		if (result.hasErrors()) {
 			return "jobSeekerSignUp";
 		}
-
+		PersonDAO personDAO =null;
 		try {
-			PersonDAO personDAO = new PersonDAO();
+			personDAO = new PersonDAO();
 			
 			personDAO.create("Job Seeker", seeker.getPassword(), seeker.getEmailID(), seeker.getFirstName(), seeker.getLastName(), seeker.getConfirmPassword(), seeker.getConfirmEmailID());
 			// DAO.close(); **/
-		} catch (Exception e) {
+			System.out.println("person DAo job seeker sign up"+seeker.getEmailID());
+			
+			return "successPage";
+		} 
+		catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 		}
-
-		return "home";
+		System.out.println("outside catch");
+		return "error";
 	}
 
-	@RequestMapping( value="/jobSeekerSignUp.htm",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, value="jobSeekerSignUp.htm")
 	public String initializeForm(@ModelAttribute("seeker") JobSeeker seeker, BindingResult result) {
 
 		return "jobSeekerSignUp";

@@ -75,8 +75,11 @@
 				</div>-->
 
 				<div class="col-sm-3 col-md-3 pull-right">
-
-					<!-- 					<ul class="nav pull-right"> -->
+			
+			<!-- 		<c:if test="${!empty requestScope.error}">
+						<p style="color: red">UserName/Password did not match</p>
+					</c:if>
+			 -->		<!-- 					<ul class="nav pull-right"> -->
 					<ul class="nav">
 						<li class="dropdown" id="menuLogin"><a
 							class="dropdown-toggle" href="#" data-toggle="dropdown"
@@ -84,35 +87,30 @@
 							<div class="dropdown-menu" style="padding: 17px;">
 
 								<div class="text-center" style="padding: 10px 0">
-									<!-- 	<div class="logo">login</div> -->
+									<div class="logo">Login</div>
 									<!-- Main Form -->
-									<a href="${pageContext.request.contextPath}/forgotPassword.htm">Forgot
-										Password? Click here! </a>
+									<a href="forgotPassword.htm">Forgot Password? Click here! </a>
 
 									<div class="login-form-1">
-
 										<form:form id="login-form" class="text-left" method="post"
 											action="loggedin.htm" commandName="person">
 											<!-- 	<div class="login-form-main-message"></div> -->
+											<c:if test="${!empty requestScope.error}">
+												<p style="color: red">UserName/Password did not match</p>
+											</c:if>
+
 											<div class="main-login-form">
 												<div class="login-group">
-
-													<div>
-														<c:if test="${!empty requestScope.error}">
-															<p style="color: red">UserName/Password did not match</p>
-														</c:if>
-													</div>
-
 													<div class="form-group">
 														<label for="lg_username" class="sr-only">Email ID</label>
 														<input type="text" class="form-control" id="emailID"
-															name="emailID" placeholder="Enter your Email ID">
+															name="emailID" placeholder="Enter your Email ID" required>
 													</div>
 													<div class="form-group">
 														<label for="lg_password" class="sr-only">Password</label>
 														<input type="password" class="form-control"
 															id="lg_password" name="password"
-															placeholder="Enter your password">
+															placeholder="Enter your password" required>
 													</div>
 													<!-- div class="form-group login-group-checkbox">
 													<input type="checkbox" id="lg_remember" name="lg_remember">
@@ -122,7 +120,6 @@
 												<button type="submit" class="login-button form-control">
 													<i class="fa fa-chevron-right"></i>
 												</button>
-
 											</div>
 											<div class="etc-login-form">
 												<button type="button" id="btnLogin" class="btn btn-primary"
@@ -164,14 +161,14 @@
 						<hr class="intro-divider">
 						<ul class="list-inline intro-social-buttons">
 
-							<li><a href="jobBoard.htm" class="btn btn-default btn-lg">Jobs
+						<!-- 	<li><a href="jobBoard.htm" class="btn btn-default btn-lg">Jobs
 							</a></li>
 							<li><a href="studentJobBoard.htm"
 								class="btn btn-default btn-lg"><span>Internships or
 										Co-ops</span></a></li>
 							<li><a href="candidateProfiles.htm"
 								class="btn btn-default btn-lg"><span>Applicant
-										Profiles</span></a></li>
+										Profiles</span></a></li> -->
 						</ul>
 					</div>
 				</div>

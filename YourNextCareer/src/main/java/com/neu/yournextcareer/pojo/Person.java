@@ -1,7 +1,4 @@
 package com.neu.yournextcareer.pojo;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.*;
 
 @Entity
@@ -34,7 +31,6 @@ public class Person {
 	
 	@Column(name="confirmEmailID")
 	private String confirmEmailID;
-	
 	public Person(){
 		
 	}
@@ -106,7 +102,6 @@ public class Person {
 	public void setPersonID(long personID) {
 		this.personID = personID;
 	}
-
 	
 	/**private void checkPassword() {
 	    if(this.password == null || this.confirmPassword == null){

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +24,6 @@ import com.neu.yournextcareer.pojo.Person;
 
 @Controller
 public class EmployerViewJobApplicants {
-
 	@RequestMapping(method = RequestMethod.GET, value="/employerViewApplications/{jobID}")
 	protected ModelAndView viewAllApplicantsForJob(@PathVariable("jobID") Long jobID, HttpSession session) throws Exception {
 

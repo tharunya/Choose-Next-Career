@@ -6,6 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Job Posted</title>
 <body>
-<h3>Uploaded resume succesfully</h3>
+<h3>Uploaded resume successfully- Go to jobs list.</h3>
 </body>
 </html>

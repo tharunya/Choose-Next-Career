@@ -1,7 +1,6 @@
 package com.neu.yournextcareer.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,46 +11,68 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.neu.yournextcareer.dao.EmployerDAO;
-import com.neu.yournextcareer.pojo.Employer;
+import com.neu.yournextcareer.dao.JobDAO;
+import com.neu.yournextcareer.dao.JobSeekerDAO;
+import com.neu.yournextcareer.dao.PersonDAO;
 import com.neu.yournextcareer.pojo.Job;
+import com.neu.yournextcareer.pojo.Person;
 
 @Controller
 public class JobSeekerListJobsController {
+	@RequestMapping(value="jobSeekerApplicationStatus.htm", method = RequestMethod.GET)
+	protected ModelAndView listAppliedJobs( HttpSession session, HttpServletResponse response) throws Exception {
+		JobSeekerDAO jobSeekerDAO = null; 
+		List<Job> appliedJobList = null;
 
-	@RequestMapping(method = RequestMethod.GET, value="/listAllJobsFromAllEmps.htm")
-	protected ModelAndView listAllJobsFromAllEmployers( HttpSession session, HttpServletResponse response) throws Exception {
-//		JobDAO jobDAO = null; 
-		EmployerDAO employerDAO = null;
-	        List employerList = null;
-	        List jobList = new ArrayList<Job>();
-	        try {
-	        	employerDAO = new EmployerDAO(); 	// jobDAO = new JobDAO();
+		try {
+			jobSeekerDAO = new JobSeekerDAO(); 
+			System.out.println("Job seeker by job DAO"+jobSeekerDAO);
+			PersonDAO personDAO = new PersonDAO();
+			System.out.println("Person DAO"+personDAO);
 
-	        //	jobList = jobDAO.list();
-	        	employerList = employerDAO.list();
-	        	
-	            Iterator<Employer> employerIterator = employerList.iterator();
+			Person jSeeker = (Person)session.getAttribute("personSession");
+			//System.out.println("Job seeker by session"+jSeeker);
 
-	            while (employerIterator.hasNext())
-	            {
-	                Employer employer = (Employer) employerIterator.next();
+			Person jobSeeker = (Person) personDAO.lookUpPersonByEmail(jSeeker.getEmailID());
+			//System.out.println("Job seeker by email"+jobSeeker);
 
-	                Iterator<Job> jobIterator = employer.getJobs().iterator();
+			appliedJobList = jobSeekerDAO.appliedJobs(jobSeeker.getPersonID());
+			System.out.println("Job controller "+jobSeeker.getPersonID());
+			session.setAttribute("appliedJobList", appliedJobList);
+			//return "jobPosted";
+			//DAO.close();
+			//return "jobSeekerApplicationStatus";
 
-	                while (jobIterator.hasNext())
-	                {
-	                    Job job = (Job) jobIterator.next();
-	                    jobList.add(job);
-	                    session.setAttribute("jobsList", jobList);      			
-	                 }
-	        		System.out.println("Jobs list size"+jobList.size());
-					System.out.println("Jobs list"+jobList);
-	            }
-		//DAO.close();
 
 		} catch (Exception e) {
 			System.out.println("Exception while displaying Job list: " + e.getMessage());
+		}
+
+		ModelAndView mv = new ModelAndView("jobSeekerApplicationStatus", "appliedJobList", appliedJobList);
+		return mv;
+	}
+
+
+	@RequestMapping(method = RequestMethod.GET, value="/listAllAvailableJobs.htm")
+	protected ModelAndView listAllAvailableJobs( HttpSession session, HttpServletResponse response) throws Exception {
+
+		JobDAO jobDAO = null;
+		List jobList = null;
+		try {
+			jobList = new ArrayList<Job>();
+			jobDAO = new JobDAO();
+
+			Person js = (Person) session.getAttribute("personSession");
+			long pid = js.getPersonID();
+			System.out.println("Pid ="+pid);
+
+			jobList = jobDAO.jobsAvailableForSpecificSeeker(pid);
+
+			System.out.println("Job list"+jobList);
+			//DAO.close();
+
+		} catch (Exception e) {
+			System.out.println("Exception while displaying unapplied jobs list: " + e.getMessage());
 		}
 
 		ModelAndView mv = new ModelAndView("jobSeekerJobsList", "jobs", jobList);

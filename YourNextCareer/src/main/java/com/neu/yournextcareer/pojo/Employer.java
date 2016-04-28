@@ -14,13 +14,12 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name="personID")
 public class Employer extends Person{
 
-	
-	@OneToMany(fetch= FetchType.EAGER, mappedBy="employer")
-	public Set<Job> jobs = new HashSet<Job>();
-
 	public Employer() {
 	}
 
+	@OneToMany(fetch= FetchType.EAGER, mappedBy="employer")
+	public Set<Job> jobs = new HashSet<Job>();
+	
 	public Set<Job> getJobs() {
 		return jobs;
 	}
@@ -30,7 +29,6 @@ public class Employer extends Person{
 	}
 
 	public void addJobs(Job job) {
-        getJobs().add(job);
-    }
-
+		getJobs().add(job);
+	}
 }

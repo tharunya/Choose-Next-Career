@@ -1,13 +1,14 @@
 package com.neu.yournextcareer.pojo;
 
-import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
-
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="jobSeekerTable")
@@ -19,15 +20,10 @@ public class JobSeeker extends Person{
 
 	@OneToOne
 	private Resume resume;
-	
-    public Resume getResume() {
-		return resume;
-	}
-	public void setResume(Resume resume) {
-		this.resume = resume;
-	}
-	public JobSeeker() {
+
+    public JobSeeker() {
     }
+ 
 	public Set<Applications> getApps() {
 		return apps;
 	}
@@ -35,9 +31,18 @@ public class JobSeeker extends Person{
 	public void setApps(Set<Applications> apps) {
 		this.apps = apps;
 	}
-	
+
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
 	public void addApps(Applications app) {
         getApps().add(app);
     }
 
+    
 }
