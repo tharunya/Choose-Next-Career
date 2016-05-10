@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<title>Withdraw Application</title>
+<title>Withdraw Applications</title>
 
 <!-- Bootstrap Core CSS -->
 <link
